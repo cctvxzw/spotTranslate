@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" class="js">
+<head>
+	<meta charset="UTF-8">
+	<title>景点智能识别语言翻译平台</title>
+	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+	
+	<!-- Style Sheets -->
+	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/jquery.bxslider.css">
+	<link rel="stylesheet" href="../../static/css/hover-min.css" />
+	<link rel="stylesheet" href="../../static/css/bootstrap-select.min.css" />
+	<link rel="stylesheet" href="../../static/css/animate.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/css/loader.css">
+	<link href="../../static/css/prettyPhoto.css" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/responsive.css">
+
+	<script>(
+		function(e,t,n){
+			var r=e.querySelectorAll("html")[0];
+			r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")
+		}
+	)
+	(document,window,0);
+	</script>
+</head>
+<body>
+	<!-- Loader -->
+	<div id="loader">
+		<h1 class="loader">
+		  <span class="loaderTxt let1">T</span>  
+		  <span class="loaderTxt let2">r</span>  
+		  <span class="loaderTxt let3">a</span>  
+		  <span class="loaderTxt let4">n</span>  
+	 	  <span class="loaderTxt let5">s</span>  
+		  <span class="loaderTxt let6">l</span>  
+		  <span class="loaderTxt let7">a</span>  
+		  <span class="loaderTxt let8">t</span>  
+		  <span class="loaderTxt let9">o</span>  
+		  <span class="loaderTxt let10">r</span>  
+		</h1>
+	</div>
+	<!-- Loader -->
+	
+
+	<!-- Main-Navigation -->
+	
+<section id="main-navigation">
+	    <div id="navigation">
+	        <nav class="navbar navbar-default" role="navigation">
+	            <div class="container">
+	                <div class="row">
+	                    <!--  Brand and toggle get grouped for better mobile display -->
+		                <div>
+		                	<div style="float:left;width:50%">
+		                		<a class="navbar-brand logo col-xs-10" href="index.html" >
+		                        	<img src="../../static/images/logo.png" alt="logo" class="img-responsive">
+		                    	</a>
+		                	</div>
+		            </div>
+	                    <!--  Collect the nav links, forms, and other content for toggling -->
+	                    <div class="col-md-9 col-sm-12 col-xs-12 pull-left">
+		                    <div class="col-sm-9">
+								<div class="top-menu" >
+									<ul class="list-unstyled list-inline" >
+										<li><a data-hover="首页" href="index.html" style="font-size: x-large">首页</a></li>
+										<li><a data-hover="景点" style="font-size: x-large" href="spot.html">景点</a></li>
+										<li id="history-main"><a style="display: none;font-size: x-large" id="history_item" style="display:none" data-hover="历史记录" href="history.html" >历史记录</a></li>
+										<li id="collection-main"><a style="display: none;font-size: x-large" id="collection_item" style="display:none"  data-hover="收藏" href="collection.html" >收藏</a></li>
+										<li id="personCenter"><a style="display:none;font-size: x-large" id="person_item" style="display:none"  data-hover="个人中心" href="personCenter.html">个人中心</a></li>
+									</ul>
+								</div>
+							</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </nav>
+	    </div>
+	</section>
+
+	<!-- Main-Navigation -->
+
+
+	<!-- Login Form -->
+
+	<div id="login">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-offset-0">
+					<form class="login-form" method="post" autocomplete="off">
+						<div class="form-group input-block">
+							<label for="name">姓名</label>
+							<input type="text" name="name" class="form-control" id="name" required>
+						</div>
+						<div class="form-group input-block">
+							<label for="email">邮箱</label>
+							<input type="email" name="email" class="form-control" id="email" required>
+						</div>
+						<div class="form-group input-block">
+							<label for="password">密码</label>
+							<input type="password" name="password" class="form-control" id="password" required>
+						</div>
+						<div class="form-group input-block">
+							<label for="city">城市</label>
+							<input type="text" name="city" class="form-control" id="city" required>
+						</div>
+						<div class="form-group input-block">
+							<label for="state">省份</label>
+							<input type="text" name="state" class="form-control" id="state" required>
+						</div>
+						<div class="select-group">
+							<select class="form-control selectpicker" id="country">
+								<option value="">选择国家</option>
+								<option value="China">中国</option>
+								<option value="England">英国</option>
+								<option value="America">美国</option>
+								<option value="Canada">加拿大</option>
+								<option value="Russia">俄罗斯</option>
+								<option value="Egypt">埃及</option>
+								<option value="Greece">希腊</option>
+								<option value="France">法国</option>
+								<option value="Germany">德国</option>
+								<option value="Japan">日本</option>
+								<option value="Korea">韩国</option>
+								<option value="Singapore">新加坡</option>
+								<option value="Malaysia">马来西亚</option>
+								<option value="India">印度</option>
+								<option value="Mexico">墨西哥</option>
+							</select>
+						</div>
+						<div class="form-group input-block">
+							<label for="phone">电话</label>
+							<input type="text" name="phone" class="form-control" id="phone" required>
+						</div>
+						<div class="form-group radio-button">
+							<label class="radio-label">性别: </label>
+							<div class="btn-group" data-toggle="buttons">
+								<label class="btn btn-default active">男
+									<input type="radio" name="gender" id="male" autocomplete="off" chacked>
+									<i class="fa fa-check"></i>
+								</label>
+
+								<label class="btn btn-default">女
+									<input type="radio" name="gender" id="female" autocomplete="off">
+									<i class="fa fa-check"></i>
+								</label>						
+							</div>
+						</div>						
+						<div class="text-center">
+							<button type="button" onclick="register()" class="btn btn-gray">
+								Submit	
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Login Form -->
+
+	
+
+	<!-- Scripts -->
+	<script src="../../static/js/wow.min.js"></script>
+	<script src="../../static/js/jquery-1.11.3.js"></script>
+	<script src="../../static/js/bootstrap.min.js"></script>
+	<script src="../../static/js/jquery.prettyPhoto.js"></script>
+	<script src="../../static/js/jquery.custom-file-input.js"></script>
+	<script src="../../static/js/jquery.bxslider-rahisified.min.js"></script>
+	<script src="../../static/js/bootstrap-select.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js"></script>
+	<script src="../../static/js/custom.js"></script>
+	<script type="text/javascript">
+	    function register(){
+	    	$.ajax({
+	    		url:"user_register",
+	    		type:'GET',
+	    		data:{name:$("#name").val(),email:$("#email").val(),password:$("#password").val(),city:$("#city").val(),state:$("#state").val(),country:$("#country option:selected").val(),phone:$("#phone").val(),gender:"男"},
+	    		success: function(data){
+	    			if(data=="SUCCESS")
+                    {
+                        window.open("login.html","_self");
+                    }
+	    			else {
+	    			    alert("注册信息有误");
+                    }
+
+	    		}
+	    	})
+
+	    	console.log($("#name").val())
+	    	console.log($("#email").val())
+	    	console.log($("#password").val())
+	    	console.log($("#city").val())
+	    	console.log($("#state").val())
+	    	console.log($("#country option:selected").val())
+	    	console.log($("#phone").val())
+
+	    }
+	 </script>
+
+</body>
+</html>

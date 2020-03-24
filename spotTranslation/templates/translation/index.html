@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" class="js">
+<head>
+	<meta charset="UTF-8">
+	<title>景点智能识别语言翻译平台</title>
+	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+	
+	<!-- Style Sheets -->
+	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/jquery.bxslider.css">
+	<link rel="stylesheet" href="../../static/css/hover-min.css" />
+	<link rel="stylesheet" href="../../static/css/bootstrap-select.min.css" />
+	<link rel="stylesheet" href="../../static/css/animate.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/css/loader.css">
+	<link href="../../static/css/prettyPhoto.css" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/responsive.css">
+	<!--<link rel="stylesheet" type="text/css" href="../../static/css/display.css">-->
+
+
+
+</head>
+<body>
+	<!-- Loader -->
+	<div id="loader">
+		<h1 class="loader">
+		  <span class="loaderTxt let1">T</span>  
+		  <span class="loaderTxt let2">r</span>  
+		  <span class="loaderTxt let3">a</span>  
+		  <span class="loaderTxt let4">n</span>  
+	 	  <span class="loaderTxt let5">s</span>  
+		  <span class="loaderTxt let6">l</span>  
+		  <span class="loaderTxt let7">a</span>  
+		  <span class="loaderTxt let8">t</span>  
+		  <span class="loaderTxt let9">o</span>  
+		  <span class="loaderTxt let10">r</span>  
+		</h1>
+	</div>
+	<!-- Loader -->
+
+
+	<!-- Main-Navigation -->
+	
+	<section id="main-navigation">
+	    <div id="navigation">
+	        <nav class="navbar navbar-default" role="navigation">
+	            <div class="container">
+	                <div class="row">
+	                    <!--  Brand and toggle get grouped for better mobile display -->
+		                <div>
+		                	<div style="float:left;width:50%">
+		                		<a class="navbar-brand logo col-xs-10" href="index.html" >
+		                        	<img src="../../static/images/logo.png" alt="logo" class="img-responsive">
+		                    	</a>
+		                	</div>
+		                    <div style="float:right;width:50%">
+								<div class="user-acces pull-right" id="login-div">
+									<a id="login-main" onclick="changeState()" href="login.html">登录</a>
+										<span>&#47;</span>
+									<a href="register.html">注册</a>
+								</div>
+								<div class="user-access pull-right" id="logout-div" style="display: none">
+									<a id="logout" href="index.html" onclick="logout()" >登出</a>
+								</div>
+		                	</div>
+		            </div>
+	                    <!--  Collect the nav links, forms, and other content for toggling -->
+	                    <div class="col-md-9 col-sm-12 col-xs-12 pull-left">
+		                    <div class="col-sm-9">
+								<div class="top-menu" >
+									<ul class="list-unstyled list-inline" >
+										<li><a data-hover="首页" href="index.html" style="font-size: 18px;">首页</a></li>
+										<li><a data-hover="景点" style="font-size: 18px" href="spot.html">景点</a></li>
+										<li id="history-main"><a style="display: block;font-size: 18px" id="history_item" style="display:none" data-hover="历史记录" href="history.html" >历史记录</a></li>
+										<li id="collection-main"><a style="display: block;font-size: 18px" id="collection_item" style="display:none"  data-hover="收藏" href="collection.html" >收藏</a></li>
+										<li id="personCenter"><a style="display:block;font-size: 18px" id="person_item" style="display:none"  data-hover="个人中心" href="personCenter.html">个人中心</a></li>
+									</ul>
+								</div>					
+							</div>
+							<div class="container">
+							</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </nav>
+	    </div>
+	</section>
+
+	<!-- Main-Navigation -->
+
+	<!-- Banner -->
+	<section id="banner" class="module parallax parallax-1">
+		<div class="container">
+			<div class="row">
+				<div class="banner-text text-center">
+					<h4 class="wow fadeInDown" data-wow-duration="0.5s">
+						快捷 方便 专业
+					</h4>
+					<h1 class="wow fadeInDown" data-wow-duration="0.5s" data-wow-delay="0.3s">
+						可选服务
+					</h1>
+					<a href="#QuickTranslator" class="btn btn-green">
+						<span>即时翻译</span>
+					</a>
+					<a class="btn btn-gray btn-human_translate" onclick="waiter()">
+						<span onclick="waiter()">人工翻译</span>
+					</a>
+					<p>
+						<a href="#steps"  class="btn-how">
+							<i class="fa fa-play-circle-o"></i>
+							<span>看看怎么开始?</span>
+						</a>
+					</p>
+
+				</div>
+			</div>
+			<div id="earth" class="wow fadeInUp">
+				<!-- <div class="flag-container"> -->
+					<div class="flag flag-1">
+						<img class="img-responsive" src="../../static/images/china-globe-flag.gif" alt="flag">
+					</div>					
+					<div class="flag flag-2">
+						<img class="img-responsive" src="../../static/images/pk-globe-flag.gif" alt="flag">
+					</div>
+					<div class="flag flag-3">
+						<img class="img-responsive" src="../../static/images/saudia-globe-flag.gif" alt="flag">
+					</div>
+					<div class="flag flag-4">
+						<img class="img-responsive" src="../../static/images/usa-globe-flag.gif" alt="flag">
+					</div>
+					<div class="flag flag-5">
+						<img class="img-responsive" src="../../static/images/rusia-globe-flag.gif" alt="flag">
+					</div>
+				<!-- </div> -->
+			</div>
+		</div>
+	</section>
+	<!-- Banner -->
+
+	<!-- Clients -->
+	
+	<section id="clients">
+		<div class="container">
+			<div class="row">
+				<div id="client-slider">
+					<ul class="client-carousel">
+						<li>
+							<img src="../../static/images/cl-logo-1.png" alt="Logo">
+						</li>
+						<li>
+							<img src="../../static/images/cl-logo-2.png" alt="Logo">
+						</li>
+						<li>
+							<img src="../../static/images/cl-logo-3.png" alt="Logo">
+						</li>
+						<li>
+							<img src="../../static/images/cl-logo-4.png" alt="Logo">
+						</li>
+						<li>
+							<img src="../../static/images/cl-logo-5.png" alt="Logo">
+						</li>						
+					</ul>
+				</div>				
+			</div>
+		</div>		
+	</section>
+
+	<!-- Clients -->
+
+	<!-- Quick Translator -->
+	<a name="QuickTranslator">
+	<section id="quick-translator">
+		<div class="container">
+			<div class="row text-center">
+				<h1 class="section-heading wow fadeInDown" data-wow-duration="0.5s">只需要一次快捷翻译?</h1>
+				<p class="section-desc wow fadeIn" data-wow-duration="0.5s">
+					<!--empor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercit ation ullamco. Duis autem vel eum iriure dolor in hendrerit in vulputate velit.--> 
+				</p>
+				<div class="section-seperator">
+					<span></span>
+				</div>
+			</div>
+			<div class="row">
+				<div id="translator">
+					<form class="translation-form">
+						<div class="col-sm-6">
+							<div class="language-bar">
+							  <select name="lang-detection" id="lang-detection" class="form-control selectpicker">
+							  	<option value="">源语言</option>
+								<option value="Chinese">中文</option>
+								<option value="English">英文</option>
+							  	<option value="Japanese">日文</option>
+							  	<option value="Korean">韩文</option>
+							  	<option value="Russian">俄文</option>					  	
+							  </select>
+						  	</div>
+						  	<div class="language-area">
+						  		<textarea class="form-control wow fadeIn" data-wow-duration="0.5s" name="lang-input" id="lang-input" rows="10">
+						  		</textarea>
+
+
+						  	</div>
+ 						  	<p class="upload-info wow fadeInDown" data-wow-duration="0.5s" data-wow-delay="0.3s">
+						  		输入一段文本，或者上传一张文字图片
+						  		<!--<input type="file" name="file-1" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
+
+						  			-<label for="file-1"><span onclick="getImage()">Upload a picture</span></label>-->
+								 <input type="file" multiple="multiple" id="upfile" >
+        								<p id='content'></p>
+
+						</div>
+						
+						<div class="col-sm-6">
+							<div class="language-bar">
+							  <select name="lang-detection" id="outPutLanguage" class="form-control selectpicker pull-right">
+							  	<option value="">目标语言</option>
+								<option value="Chinese">中文</option>
+								<option value="English">英文</option>
+							  	<!--<option value="arabic">Arabic</option>
+							  	<option value="english">English</option>
+							  	<option value="rusian">Rusian</option>-->						  	
+							  </select>							  
+						  	</div>
+						  	<div class="language-area">
+						  		<textarea class="form-control wow fadeIn" data-wow-duration="0.5s" name="lang-output" id="lang-output" rows="10"></textarea>
+						  	</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="text-center translate-option"  >
+							<button type="button" class="btn  btn-instant-translate wow fadeIn" onclick="translation()" id="translation-submit" style="background-color: #1AE6E6;">
+								翻译
+							</button>
+							<a href="#" class="human-translate wow fadeInDown" data-wow-duration="0.5s" data-wow-delay="0.1s">需要人工翻译?</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+    </a>
+	<!-- Quick Translator -->
+
+	<!-- Translation Steps -->
+    <a name="steps">
+	<section id="translation-steps" style="background-color: #1AE6E6">
+		<div class="container" style="background-color: #1AE6E6">
+			<div class="row text-center steps-heading">
+				<h1>相信人工翻译，就选它吧!</h1>				
+			</div>
+			<div class="row">
+				<div class="steps-container">
+					<div class="col-sm-3 text-center step">
+						<span class="wow flipInY" data-wow-duration="1s"><img src="../../static/images/steps-flag.png" alt="flag"></span>
+						<p>1.选择语言</p>
+						<img class="steps-arrow" src="../../static/images/steps-arrow.png" alt="arrow">
+					</div>
+					<div class="col-sm-3 text-center step">
+						<span class="wow flipInY" data-wow-duration="1s" data-wow-delay="0.2s"><i class="fa fa-file-text-o"></i></span>
+						<p>2.输入或上传文本</p>
+						<img class="steps-arrow" src="../../static/images/steps-arrow.png" alt="arrow">
+					</div>
+					<div class="col-sm-3 text-center step">
+						<span class="wow flipInY" data-wow-duration="1s" data-wow-delay="0.4s"><i class="fa fa-clock-o"></i></span>
+						<p>3.设置截止日期</p>
+						<img class="steps-arrow" src="../../static/images/steps-arrow.png" alt="arrow">
+					</div>
+					<div class="col-sm-3 text-center step">
+						<span class="wow flipInY" data-wow-duration="1s" data-wow-delay="0.6s"><i class="fa fa-money"></i></span>
+						<p>4.获取结果</p>						
+					</div>
+					<div class="text-center">
+						<a href="#" class="btn btn-gray">
+							现在就开始吧！
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+    </a>
+	<!-- Translation Steps -->
+
+	<!-- Available Language -->
+
+	<section id="available-languages">
+		<div class="container">
+			<div class="row text-center">
+				<h1 class="section-heading wow fadeInDown" data-wow-duration="0.5s">可用的语言</h1>
+				<p class="section-desc wow fadeIn" data-wow-duration="0.5s">
+					<!--empor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercit ation ullamco. Duis autem vel eum iriure dolor in hendrerit in vulputate velit. -->
+				</p>
+				<div class="section-seperator">
+					<span></span>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid slider-container">
+			<div class="row">
+				<div id="slider-1">
+					<ul class="language-carousel">
+						<li>
+							<img class="img-responsive" src="../../static/images/lang_Austria.png" alt="Lang Flag">
+						</li>
+						<li>
+							<img src="../../static/images/lang_Bolivia.png" alt="Lang Flag">
+						</li>
+						<li>
+							<img src="../../static/images/lang_jordan.png" alt="Lang Flag">
+						</li>
+						<li>
+							<img src="../../static/images/lang_Lybya.png" alt="Lang Flag">
+						</li>
+						<li>
+							<img src="../../static/images/lang_Malysia.png" alt="Lang Flag">
+						</li>
+						<li>
+							<img src="../../static/images/lang_Mozambique.png" alt="Lang Flag">
+						</li>
+						<li>
+							<img src="../../static/images/lang_Newzeland.png" alt="Lang Flag">
+						</li>
+						<li>
+							<img src="../../static/images/lang_Pakistan.png" alt="Lang Flag">
+						</li>
+					</ul>
+				</div>							
+			</div>
+		</div>
+	</section>	
+
+	<!-- Available Language -->
+
+
+	<!-- Scripts -->
+	<script src="../../static/js/wow.min.js"></script>
+	<script src="../../static/js/jquery-1.11.3.js"></script>
+	<script src="../../static/js/bootstrap.min.js"></script>
+	<script src="../../static/js/jquery.prettyPhoto.js"></script>
+	<script src="../../static/js/jquery.bxslider-rahisified.min.js"></script>
+	<script src="../../static/js/jquery.custom-file-input.js"></script>
+	<script src="../../static/js/bootstrap-select.min.js"></script>
+	<script src="../../static/js/custom.js"></script>
+
+
+</body>
+	<script>
+
+
+        //登录之后的区别
+        if(localStorage.getItem("haveLogin")=="true")
+        {
+            console.log(localStorage.getItem("user_name"));
+            console.log(localStorage.getItem("user_email"));
+            console.log(localStorage.getItem("user_password"));
+            console.log(localStorage.getItem("user_phone"));
+            console.log(localStorage.getItem("user_level"));
+            console.log(localStorage.getItem("user_state"));
+            console.log(localStorage.getItem("user_country"));
+            console.log(localStorage.getItem("user_city"));
+
+
+            document.getElementById("login-div").style.display="none";
+            document.getElementById("logout-div").style.display="block";
+            document.getElementById("history_item").style.display="none";
+            document.getElementById("collection_item").style.display="block";
+            document.getElementById("person_item").style.display="block";
+        }
+        else {
+            document.getElementById("login-div").style.display = "block";
+            document.getElementById("logout-div").style.display = "none";
+            document.getElementById("history_item").style.display = "none";
+            document.getElementById("collection_item").style.display = "none";
+            document.getElementById("person_item").style.display = "none";
+        }
+
+        function logout() {
+            localStorage.removeItem("haveLogin");
+            localStorage.removeItem("user_name");
+            localStorage.removeItem("user_email");
+            localStorage.removeItem("user_password");
+            localStorage.removeItem("user_phone");
+            localStorage.removeItem("user_level");
+            localStorage.removeItem("user_state");
+            localStorage.removeItem("user_country");
+            localStorage.removeItem("user_city");
+        }
+
+
+        function waiter() {
+            alert("敬请期待！");
+        }
+
+
+     
+
+
+		/*function(e,t,n){
+			var r=e.querySelectorAll("html")[0];
+			r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")
+		})
+		(document,window,0);*/
+        
+
+		//获取图片路径
+       	function getObjectURL(file) {
+			var url = null;
+			if (window.createObjectURL != undefined) { // basic
+				url = window.createObjectURL(file);
+			} else if (window.URL != undefined) { // mozilla(firefox)
+				url = window.URL.createObjectURL(file);
+			} else if (window.webkitURL != undefined) { // webkit or chrome
+				url = window.webkitURL.createObjectURL(file);
+			}
+				return url;
+			}
+        //图片翻译接口
+        var test = document.getElementById('upfile');
+        test.addEventListener('change', function() {
+		    var t_files = this.files;
+			var str = '';
+			for(var i = 0, len = t_files.length; i < len; i++) {
+				//str += '<a href="javascript:void(0)">' + t_files[i].name + '</a><br/>';
+				//document.getElementById("lang-output").innerHTML=t_files[i].name;
+				$.ajax({
+					url:"image_translation",
+					type:'GET',
+					data:{pictureName:t_files[i].name},
+					success:function(data){
+						document.getElementById("lang-output").innerHTML=data;
+					}
+				})
+
+			}
+			//document.getElementById('content').innerHTML = str;
+		}, false);
+
+
+
+		//翻译按钮的监听事件
+		function translation(){
+			var $translation = $("#translation-submit");
+			var obj=document.getElementById("lang-detection");
+
+			var $out=$("#lang-output");
+			$.ajax({
+				url:"text_translation",
+				type:'GET',
+				data:{text:$("#lang-input").val(),myLanguage:$("#lang-detection option:selected").val(),outputLanguage:$("#outPutLanguage option:selected").val()},
+				success:function(data){
+					document.getElementById("lang-output").innerHTML=data;
+					/*
+					if(data==true)
+					{
+						$ajax({
+							url:"后端地址",
+							type:'GET',
+							data：{}，
+							success:function(data)
+							{
+								translationResult=data;
+								document.getElementById("lang-output").innerHTML=translationResult;
+							}
+	
+						}
+					}
+					*/
+
+				}
+			})
+			/*
+			document.getElementById("lang-output").innerHTML=$("#lang-input").val();
+			console.log($("#lang-input").val());
+			console.log($("#lang-detection option:selected").val());
+			console.log($("#outPutLanguage option:selected").val());
+			*/
+		}
+	</script>
+</html>

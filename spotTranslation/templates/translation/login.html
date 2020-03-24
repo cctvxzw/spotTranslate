@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" class="js">
+<head>
+	<meta charset="UTF-8">
+	<title>景点智能识别语言翻译平台</title>
+	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+	
+	<!-- Style Sheets -->
+	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/jquery.bxslider.css">
+	<link rel="stylesheet" href="../../static/css/hover-min.css" />
+	<link rel="stylesheet" href="../../static/css/bootstrap-select.min.css" />
+	<link rel="stylesheet" href="../../static/css/animate.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/css/loader.css">
+	<link href="../../static/css/prettyPhoto.css" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/responsive.css">
+
+	<script>(
+		function(e,t,n){
+			var r=e.querySelectorAll("html")[0];
+			r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")
+		}
+	)
+	(document,window,0);
+	</script>
+</head>
+<body>
+	<!-- Loader -->
+	<div id="loader">
+		<h1 class="loader">
+		  <span class="loaderTxt let1">T</span>  
+		  <span class="loaderTxt let2">r</span>  
+		  <span class="loaderTxt let3">a</span>  
+		  <span class="loaderTxt let4">n</span>  
+	 	  <span class="loaderTxt let5">s</span>  
+		  <span class="loaderTxt let6">l</span>  
+		  <span class="loaderTxt let7">a</span>  
+		  <span class="loaderTxt let8">t</span>  
+		  <span class="loaderTxt let9">o</span>  
+		  <span class="loaderTxt let10">r</span>  
+		</h1>
+	</div>
+	<!-- Loader -->
+	
+
+	<!-- Main-Navigation -->
+	
+	<section id="main-navigation">
+	    <div id="navigation">
+	        <nav class="navbar navbar-default" role="navigation">
+	            <div class="container">
+	                <div class="row">
+	                    <!--  Brand and toggle get grouped for better mobile display -->
+		                <div>
+		                	<div style="float:left;width:50%">
+		                		<a class="navbar-brand logo col-xs-10" href="index.html" >
+		                        	<img src="../../static/images/logo.png" alt="logo" class="img-responsive">
+		                    	</a>
+		                	</div>
+		            </div>
+	                    <!--  Collect the nav links, forms, and other content for toggling -->
+	                    <div class="col-md-9 col-sm-12 col-xs-12 pull-left">
+		                    <div class="col-sm-9">
+								<div class="top-menu" >
+									<ul class="list-unstyled list-inline" >
+										<li><a data-hover="首页" href="index.html" style="font-size: 18px">首页</a></li>
+										<li><a data-hover="景点" style="font-size: 18px" href="spot.html">景点</a></li>
+										<li id="history-main"><a style="display: none;font-size: 18px" id="history_item" style="display:none" data-hover="历史记录" href="history.html" >历史记录</a></li>
+										<li id="collection-main"><a style="display: none;font-size: 18px" id="collection_item" style="display:none"  data-hover="收藏" href="collection.html" >收藏</a></li>
+										<li id="personCenter"><a style="display:none;font-size: 18px" id="person_item" style="display:none"  data-hover="个人中心" href="personCenter.html">个人中心</a></li>
+									</ul>
+								</div>
+							</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </nav>
+	    </div>
+	</section>
+
+	<!-- Main-Navigation -->
+
+
+	
+	<!-- Login Form -->
+		
+	<div id="login">
+		<div class="container" >
+			<div class="row" >
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-offset-0">
+					<form class="login-form" method="post"  style="background-color: #BBBBBB;box-shadow: #1b6d85;opacity: 0.8">
+						<div class="form-group input-block">
+							<label for="name">用户名</label>
+							<input type="text" name="name" class="form-control" id="name" required>
+						</div>
+						<div class="form-group input-block">
+							<label for="password">密码</label>
+							<input type="password" name="password" class="form-control" id="password" required>
+						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-gray" onclick="login()">
+								Submit	
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Login Form -->
+
+	
+
+	<!-- Scripts -->
+	<script src="../../static/js/wow.min.js"></script>
+	<script src="../../static/js/jquery-1.11.3.js"></script>
+	<script src="../../static/js/bootstrap.min.js"></script>
+	<script src="../../static/js/jquery.prettyPhoto.js"></script>
+	<script src="../../static/js/jquery.custom-file-input.js"></script>
+	<script src="../../static/js/jquery.bxslider-rahisified.min.js"></script>
+	<script src="../../static/js/bootstrap-select.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js"></script>
+	<script src="../../static/js/custom.js"></script>
+	<script type="text/javascript">
+	    function login(){
+	    	$.ajax({
+	    		url:"user_login",
+	    		type:"GET",
+                datatype:"json",
+	    		data:{userName:$("#name").val(),userPassword:$("#password").val()},
+	    		success:function(data){
+	    		    var datainfo = JSON.parse(data);
+	    		    console.log(datainfo);
+                    var user_name=datainfo.user_info[0];
+                    var user_password = datainfo.user_info[1];
+                    var user_email = datainfo.user_info[2];
+                    var user_country = datainfo.user_info[3];
+                    var user_state = datainfo.user_info[4];
+                    var user_city = datainfo.user_info[5];
+                    var user_phone = datainfo.user_info[6];
+                    var user_level = datainfo.user_info[7];
+                    localStorage.setItem("user_name",user_name);
+                    localStorage.setItem("user_password",user_password);
+                    localStorage.setItem("user_email",user_email);
+                    localStorage.setItem("user_phone",user_phone);
+                    localStorage.setItem("user_country",user_country);
+                    localStorage.setItem("user_state",user_state);
+                    localStorage.setItem("user_city",user_city);
+                    localStorage.setItem("user_level",user_level);
+                    localStorage.setItem("haveLogin","true");
+
+                    console.log(localStorage.getItem("user_name"));
+                    console.log(localStorage.getItem("user_email"));
+                    console.log(localStorage.getItem("user_password"));
+                    console.log(localStorage.getItem("user_phone"));
+                    console.log(localStorage.getItem("user_level"));
+                    console.log(localStorage.getItem("user_state"));
+                    console.log(localStorage.getItem("user_country"));
+                    console.log(localStorage.getItem("user_city"));
+
+                    window.open("index.html","_self");
+	    		}
+
+	    	})
+	    }
+	 </script>
+
+</body>
+</html>

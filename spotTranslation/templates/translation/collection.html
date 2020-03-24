@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" class="js">
+<head>
+	<meta charset="UTF-8">
+	<title>Translator</title>
+	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+	
+	<!-- Style Sheets -->
+	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/jquery.bxslider.css">
+	<link rel="stylesheet" href="../../static/css/hover-min.css" />
+	<link rel="stylesheet" href="../../static/css/bootstrap-select.min.css" />
+	<link rel="stylesheet" href="../../static/css/animate.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/css/loader.css">
+	<link href="../../static/css/prettyPhoto.css" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/trackofhistory.css">
+
+    <script type="text/javascript">
+        function showcollection() {
+            var username = localStorage.getItem("user_name");
+            $.ajax({
+                url:"get_collection",
+                type:"GET",
+                dataType:"JSON",
+                data:{username:username},
+                success:function (data) {
+                    var collectionlist=data.collect_info;
+                    console.log(collectionlist);
+
+                    var impl="";
+                    for(var i=0;i<collectionlist.length;i++)
+                    {
+                        impl=impl+"<li>\
+				                        <div class='cbp_tmicon cbp_tmicon-phone'>"+i+"</div>\
+				                        <div class='cbp_tmlabel row'>\
+					                    <h2 id='spotName'><a href='"+collectionlist[i][3]+"'>"+collectionlist[i][0]+"</a></h2>\
+					                    <div class='form-inline' style='height: 200px'>\
+						                <div style='float: left;margin-right: 40px;height: 100%;margin-top:60px'>\
+							                <img src='"+collectionlist[i][2]+"' style='width:140px;height: 100px;' class='form-inline' />\
+						                </div>\
+						                <div style='float: left;height:100% ;margin-top: 40px'>\
+							            热度：<p>"+collectionlist[i][4]+"</p>\
+							            星级：<p>"+collectionlist[i][5]+"</p>\
+							            简介：<p>"+collectionlist[i][1]+"</p>\
+						                </div>\
+					                    </div>\
+				                        </div>\
+			                        </li>\
+			                        "
+                    }
+                    $("#mycollection").html(impl);
+
+                }
+            })
+        }
+
+    </script>
+
+	<script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
+</head>
+<body>
+<!-- Loader -->
+	<div id="loader">
+		<h1 class="loader">
+		  <span class="loaderTxt let1">T</span>  
+		  <span class="loaderTxt let2">r</span>  
+		  <span class="loaderTxt let3">a</span>  
+		  <span class="loaderTxt let4">n</span>  
+	 	  <span class="loaderTxt let5">s</span>  
+		  <span class="loaderTxt let6">l</span>  
+		  <span class="loaderTxt let7">a</span>  
+		  <span class="loaderTxt let8">t</span>  
+		  <span class="loaderTxt let9">o</span>  
+		  <span class="loaderTxt let10">r</span>  
+		</h1>
+	</div>
+	<!-- Loader -->
+	
+
+
+	<!-- Main-Navigation -->
+	
+<section id="main-navigation">
+	    <div id="navigation">
+	        <nav class="navbar navbar-default" role="navigation">
+	            <div class="container">
+	                <div class="row">
+	                    <!--  Brand and toggle get grouped for better mobile display -->
+		                <div>
+		                	<div style="float:left;width:50%">
+		                		<a class="navbar-brand logo col-xs-10" href="index.html" >
+		                        	<img src="../../static/images/logo.png" alt="logo" class="img-responsive">
+		                    	</a>
+		                	</div>
+		                    <div style="float:right;width:50%">
+								<div class="user-acces pull-right" id="login-div">
+									<a id="login-main" onclick="changeState()" href="login.html">登录</a>
+										<span>&#47;</span>
+									<a href="register.html">注册</a>
+								</div>
+								<div class="user-access pull-right" id="logout-div" style="display: none">
+									<a id="logout" href="index.html" onclick="logout()" >登出</a>
+								</div>
+		                	</div>
+		            </div>
+	                    <!--  Collect the nav links, forms, and other content for toggling -->
+	                    <div class="col-md-9 col-sm-12 col-xs-12 pull-left">
+		                    <div class="col-sm-9">
+								<div class="top-menu" >
+									<ul class="list-unstyled list-inline" >
+										<li><a data-hover="首页" href="index.html" style="font-size: 18px">首页</a></li>
+										<li><a data-hover="景点" style="font-size: 18px" href="spot.html">景点</a></li>
+										<li id="history-main"><a style="display: none;font-size: 18px" id="history_item" style="display:none" data-hover="历史记录" href="history.html" >历史记录</a></li>
+										<li id="collection-main"><a style="display: block;font-size: 18px" id="collection_item" style="display:none"  data-hover="收藏" href="collection.html" >收藏</a></li>
+										<li id="personCenter"><a style="display:block;font-size: 18px" id="person_item" style="display:none"  data-hover="个人中心" href="personCenter.html">个人中心</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="container">
+							</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </nav>
+	    </div>
+	</section>
+	<!-- Main-Navigation -->
+
+	<!-- Page-Bar -->
+
+
+<div class="container">
+    <div> <button type="button" id="mycollect" style="border:0px;margin-top:40px;size:20px;background-color: rgb(26, 230, 230); visibility: visible; animation-name: fadeIn;" onclick="showcollection()">查看收藏</button></div>
+	<div class="main" >
+		<ul class="cbp_tmtimeline" id="mycollection">
+			<li>
+				<div class="cbp_tmicon cbp_tmicon-phone">1</div>
+				<div class="cbp_tmlabel row">
+					<h2 id='spotName'>景点名称</h2>
+					<div class="form-inline" style="height: 160px">
+						<div style="float: left;margin-right: 40px;height: 100%">
+							<img src="/static/images/news1.png"  class="form-inline" />
+						</div>
+						<div style="float: left;height:100% ;margin-top: 40px">
+							热度：<p></p>
+							星级：<p></p>
+							简介：<p></p>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="cbp_tmicon cbp_tmicon-phone">2</div>
+				<div class="cbp_tmlabel row">
+					<h2 id='spotName'>景点名称</h2>
+					<div class="form-inline" style="height: 160px">
+						<div style="float: left;margin-right: 40px;height: 100%">
+							<img src="/static/images/news1.png" class="form-inline" />
+						</div>
+						<div style="float: left;height:100% ;margin-top: 40px">
+							热度：<p></p>
+							星级：<p></p>
+							简介：<p></p>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="cbp_tmicon cbp_tmicon-phone">3</div>
+				<div class="cbp_tmlabel row">
+					<h2 id='spotName'>景点名称</h2>
+					<div class="form-inline" style="height: 160px">
+						<div style="float: left;margin-right: 40px;height: 100%">
+							<img src="/static/images/news1.png" class="form-inline" />
+						</div>
+						<div style="float: left;height:100% ;margin-top: 40px">
+							热度：<p></p>
+							星级：<p></p>
+							简介：<p></p>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="cbp_tmicon cbp_tmicon-phone">4</div>
+				<div class="cbp_tmlabel row">
+					<h2 id='spotName'>景点名称</h2>
+					<div class="form-inline" style="height: 160px">
+						<div style="float: left;margin-right: 40px;height: 100%">
+							<img src="/static/images/news1.png" class="form-inline" />
+						</div>
+						<div style="float: left;height:100% ;margin-top: 40px">
+							热度：<p></p>
+							星级：<p></p>
+							简介：<p></p>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="cbp_tmicon cbp_tmicon-phone">5</div>
+				<div class="cbp_tmlabel row">
+					<h2 id='spotName'>景点名称</h2>
+					<div class="form-inline" style="height: 160px">
+						<div style="float: left;margin-right: 40px;height: 100%">
+							<img src="/static/images/news1.png" class="form-inline" />
+						</div>
+						<div style="float: left;height:100% ;margin-top: 40px">
+							热度：<p></p>
+							星级：<p></p>
+							简介：<p></p>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="cbp_tmicon cbp_tmicon-phone">6</div>
+				<div class="cbp_tmlabel row">
+					<h2 id='spotName'>景点名称</h2>
+					<div class="form-inline" style="height: 160px">
+						<div style="float: left;margin-right: 40px;height: 100%">
+							<img src="/static/images/news1.png" class="form-inline" />
+						</div>
+						<div style="float: left;height:100% ;margin-top: 40px">
+							热度：<p></p>
+							星级：<p></p>
+							简介：<p></p>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="cbp_tmicon cbp_tmicon-phone">7</div>
+				<div class="cbp_tmlabel row">
+					<h2 id='spotName'>景点名称</h2>
+					<div class="form-inline" style="height: 160px">
+						<div style="float: left;margin-right: 40px;height: 100%">
+							<img src="/static/images/news1.png" class="form-inline" />
+						</div>
+						<div style="float: left;height:100% ;margin-top: 40px">
+							热度：<p></p>
+							星级：<p></p>
+							简介：<p></p>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+            //登录之后的区别
+        if(localStorage.getItem("haveLogin")=="true")
+        {
+            console.log(localStorage.getItem("user_name"));
+            console.log(localStorage.getItem("user_email"));
+            console.log(localStorage.getItem("user_password"));
+            console.log(localStorage.getItem("user_phone"));
+            console.log(localStorage.getItem("user_level"));
+            console.log(localStorage.getItem("user_state"));
+            console.log(localStorage.getItem("user_country"));
+            console.log(localStorage.getItem("user_city"));
+
+
+            document.getElementById("login-div").style.display="none";
+            document.getElementById("logout-div").style.display="block";
+            document.getElementById("history_item").style.display="none";
+            document.getElementById("collection_item").style.display="block";
+            document.getElementById("person_item").style.display="block";
+        }
+        else {
+            document.getElementById("login-div").style.display = "block";
+            document.getElementById("logout-div").style.display = "none";
+            document.getElementById("history_item").style.display = "none";
+            document.getElementById("collection_item").style.display = "none";
+            document.getElementById("person_item").style.display = "none";
+        }
+
+        function logout() {
+            localStorage.removeItem("haveLogin");
+            localStorage.removeItem("user_name");
+            localStorage.removeItem("user_email");
+            localStorage.removeItem("user_password");
+            localStorage.removeItem("user_phone");
+            localStorage.removeItem("user_level");
+            localStorage.removeItem("user_state");
+            localStorage.removeItem("user_country");
+            localStorage.removeItem("user_city");
+            window.open("index.html","_self");
+        }
+</script>
+
+
+
+	<!-- Scripts -->
+	<script src="../../static/js/wow.min.js"></script>
+	<script src="../../static/js/jquery-1.11.3.js"></script>
+	<script src="../../static/js/bootstrap.min.js"></script>
+	<script src="../../static/js/jquery.custom-file-input.js"></script>
+	<script src="../../static/js/jquery.prettyPhoto.js"></script>
+	<script src="../../static/js/jquery.bxslider-rahisified.min.js"></script>
+	<script src="../../static/js/custom.js"></script>
+
+</body>
+</html>

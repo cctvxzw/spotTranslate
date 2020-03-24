@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>景点智能识别语言翻译</title>
+        <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+        <meta content="yes" name="apple-mobile-web-app-capable"/>
+        <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+        <meta content="telephone=no" name="format-detection"/>
+        <link href="/static/css/personCenter.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/css/hover-min.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+
+
+    </head>
+    <body>
+
+        <section id="main-navigation">
+        <div id="navigation">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container">
+                    <div class="row">
+                        <!--  Brand and toggle get grouped for better mobile display -->
+                        <div>
+                            <div style="float:left;width:50%">
+                                <a class="navbar-brand logo col-xs-10" href="index.html" >
+                                    <img src="/static/images/logo.png" alt="logo" class="img-responsive">
+                                </a>
+                            </div>
+                            <div style="float:right;width:50%" id="login-div">
+                                <!--<div class="user-acces pull-right">
+                                    <a id="login-main" onclick="changeState()" href="login.html">登录</a>
+                                        <span>&#47;</span>
+                                    <a href="register.html">注册</a>
+                                </div >-->
+                                <div class="user-access pull-right" id="logout-div" >
+                                    <a id="logout" href="#" onclick="logout()">登出</a>
+                                </div>
+                            </div>
+                    </div>
+                        <!--  Collect the nav links, forms, and other content for toggling -->
+                        <div class="col-md-9 col-sm-12 col-xs-12 pull-left">
+                            <div class="col-sm-9">
+                                <div class="top-menu" >
+                                    <ul class="list-unstyled list-inline" >
+                                        <li><a data-hover="首页" style="font-size: 18px" href="index.html">首页</a></li>
+                                        <li><a data-hover="景点" style="font-size: 18px" href="spot.html">景点</a></li>
+                                        <li id="history-main"><a style="display: none"  id="history_item" data-hover="历史记录" href="history.html" >历史记录</a></li>
+                                        <li id="collection-main"><a style="display: block;font-size: 18px" id="collection_item" data-hover="收藏" href="collection.html" >收藏</a></li>
+                                        <li id="personCenter"><a style="display:block;font-size: 18px" id="person_item" data-hover="个人中心" href="personCenter.html">个人中心</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+        <div class="divHeight"></div>
+            <a class="aui-flex b-line" href="collection.html">
+            <div class="aui-flex-box-hd">
+                <img src="/static/images/icon-left-001.png" alt="">
+            </div>
+            <div class="aui-flex-box">收藏</div>
+            <span class="aui-arrow"></span>
+        </a>
+        <div class="divHeight"></div>
+        <a class="aui-flex " href="history.html">
+            <div class="aui-flex-box-hd">
+                <img src="/static/images/icon-left-003.png" alt="">
+            </div>
+            <div class="aui-flex-box">个人信息</div>
+            <span class="aui-arrow"></span>
+        </a>
+        <div>
+            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-offset-0">
+                    <form class="login-form" method="post" autocomplete="off"  style="background-color: #BBBBBB;box-shadow: #1b6d85;opacity: 0.8">
+                        姓名：<div class="form-group input-block">
+                            <label for="name" id="name">姓名</label>
+                        </div>
+                        邮箱：<div class="form-group input-block">
+                            <label for="email" id="email">邮箱</label>
+                        </div>
+                        会员等级:<div class="form-group input-block">
+                            <label for="password" id="level">等级</label>
+                        </div>
+                        地址：<div class="form-group input-block">
+                            <label for="city" id="address">国家 省份 城市</label>
+                        </div>
+                        当前位置：<div class="form-group input-block">
+                            <label for="state" id="current_address">当前位置</label>
+                        </div>
+                        电话：<div class="form-group input-block">
+                            <label for="phone" id="phone">电话</label>
+                        </div>
+                        性别：<div class="form-group input-block">
+                            <label class="radio-label" id="gender">性别 </label>
+                        </div>
+                    </form>
+        </div>
+
+        <div class="divHeight"></div>
+    </div>
+            <script type="text/javascript">
+            document.getElementById("current_address").innerHTML=localStorage.getItem("current_address");
+            document.getElementById("gender").innerHTML="男";
+            document.getElementById("name").innerHTML=localStorage.getItem("user_name");
+            document.getElementById("email").innerHTML=localStorage.getItem("user_email");
+            document.getElementById("phone").innerHTML=localStorage.getItem("user_phone");
+            document.getElementById("address").innerHTML=localStorage.getItem("user_country")+","+localStorage.getItem("user_state")+","+localStorage.getItem("user_city");
+            document.getElementById("level").innerHTML=localStorage.getItem("user_level");
+        </script>
+
+    <script type="text/javascript">
+
+
+
+        function logout() {
+            localStorage.setItem("haveLogin","false");
+            localStorage.removeItem("user_name");
+            localStorage.removeItem("user_email");
+            localStorage.removeItem("user_password");
+            localStorage.removeItem("user_phone");
+            localStorage.removeItem("user_level");
+            localStorage.removeItem("user_state");
+            localStorage.removeItem("user_country");
+            localStorage.removeItem("user_city");
+            window.open("index.html","_self");
+        }
+</script>
+
+     </body>
+</html>

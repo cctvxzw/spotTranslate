@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en" class="js">
+<head>
+	<meta charset="UTF-8">
+	<title>Translator</title>
+	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+	
+	<!-- Style Sheets -->
+	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/jquery.bxslider.css">
+	<link rel="stylesheet" href="../../static/css/hover-min.css" />
+	<link rel="stylesheet" href="../../static/css/bootstrap-select.min.css" />
+	<link rel="stylesheet" href="../../static/css/animate.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/css/loader.css">
+	<link href="../../static/css/prettyPhoto.css" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/spot.css"/>
+	<link rel="stylesheet" type="text/css" href="../../static/css/responsive.css">
+
+	<script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=HgmQIwSxbEKb5wSa52GRbWKWGS4HwP9y">
+	//v3.0版本的引用方式：src="http://api.map.baidu.com/api?v=3.0&ak=您的密钥"
+	</script>
+	<!-- Scripts -->
+	<script src="../../static/js/wow.min.js"></script>
+	<script src="../../static/js/jquery-1.11.3.js"></script>
+	<script src="../../static/js/bootstrap.min.js"></script>
+	<script src="../../static/js/jquery.prettyPhoto.js"></script>
+	<script src="../../static/js/jquery.custom-file-input.js"></script>
+	<script src="../../static/js/jquery.bxslider-rahisified.min.js"></script>
+	<script src="../../static/js/bootstrap-select.min.js"></script>s
+	<script src="../../static/js/custom.js"></script>
+
+    <script type="text/javascript">
+		//收藏功能
+		function collect(obj)
+		{
+		    if(localStorage.getItem("haveLogin")=="true")
+            {
+
+                var collectionObj=obj.parentNode.parentNode;
+                var nodes=collectionObj.childNodes;
+
+                var imageUrl=nodes[1].childNodes[1].childNodes[1].childNodes[0].getAttribute("src");
+                var siteUrl=nodes[1].childNodes[3].childNodes[1].childNodes[0].getAttribute("href")
+                var spotName=nodes[1].childNodes[3].childNodes[1].childNodes[0].innerHTML;
+                var spotHot=nodes[1].childNodes[3].childNodes[4].innerHTML;
+                var spotRate=nodes[1].childNodes[3].childNodes[7].innerHTML;
+                var spotIntroduce=nodes[1].childNodes[3].childNodes[10].innerHTML;
+
+                var user_name=localStorage.getItem("user_name");
+
+
+                console.log(123);
+                console.log(user_name);
+
+
+
+                console.log(spotIntroduce);
+                console.log(imageUrl);
+                console.log(siteUrl);
+                console.log(spotName);
+                console.log(spotHot);
+                console.log(spotRate);
+                console.log(123);
+
+
+                $.ajax({
+                    url:"add_collection",
+                    type:"GET",
+                    data:{user_name:user_name,spotName:spotName,spotHot:spotHot,spotRate:spotRate,spotIntroduce:spotIntroduce,imageUrl:imageUrl,siteUrl:siteUrl},
+                    success:function(data){
+                        if(data=="Failed")
+                        {
+                            alert("重复收藏！");
+                        }
+                        else
+                        {
+                            alert("收藏成功！");
+                        }
+
+                    }
+                })
+
+            }
+		    else
+            {
+                alert("登录后可收藏！");
+            }
+
+
+
+		}
+	</script>
+
+
+	<style type="text/css">  
+        html{height:100%}
+        body{
+            height:100%;
+            margin:0px;
+            padding:0px}
+        #container{
+            height:50%;
+            width:100%;
+
+        }
+        .add_title{
+            font-size: 20px;
+        }
+        .add_btn{
+            border: 0;
+            background-color: #ff6600;
+            color: #ffffff;
+            border-radius: 5px;
+            padding: 3px 15px;
+        }
+        li{
+            margin-bottom: 6px;
+        }
+	</style>  
+</head>
+<body>
+	<!-- Loader -->
+	<div id="loader">
+		<h1 class="loader">
+		  <span class="loaderTxt let1">T</span>  
+		  <span class="loaderTxt let2">r</span>  
+		  <span class="loaderTxt let3">a</span>  
+		  <span class="loaderTxt let4">n</span>  
+	 	  <span class="loaderTxt let5">s</span>  
+		  <span class="loaderTxt let6">l</span>  
+		  <span class="loaderTxt let7">a</span>  
+		  <span class="loaderTxt let8">t</span>  
+		  <span class="loaderTxt let9">o</span>  
+		  <span class="loaderTxt let10">r</span>  
+		</h1>
+	</div>
+	<!-- Loader -->
+	
+
+		
+<section id="main-navigation">
+	    <div id="navigation">
+	        <nav class="navbar navbar-default" role="navigation">
+	            <div class="container">
+	                <div class="row">
+	                    <!--  Brand and toggle get grouped for better mobile display -->
+		                <div>
+		                	<div style="float:left;width:50%">
+		                		<a class="navbar-brand logo col-xs-10" href="index.html" >
+		                        	<img src="../../static/images/logo.png" alt="logo" class="img-responsive">
+		                    	</a>
+		                	</div>
+		                    <div style="float:right;width:50%">
+								<div class="user-acces pull-right" id="login-div">
+									<a id="login-main" onclick="changeState()" href="login.html">登录</a>
+										<span>&#47;</span>
+									<a href="register.html">注册</a>
+								</div>
+								<div class="user-access pull-right" id="logout-div" style="display: none">
+									<a id="logout" href="index.html" onclick="logout()" >登出</a>
+								</div>
+		                	</div>
+		            </div>
+	                    <!--  Collect the nav links, forms, and other content for toggling -->
+	                    <div class="col-md-9 col-sm-12 col-xs-12 pull-left">
+		                    <div class="col-sm-9">
+								<div class="top-menu" >
+									<ul class="list-unstyled list-inline" >
+										<li><a data-hover="首页" href="index.html" style="font-size: 18px">首页</a></li>
+										<li><a data-hover="景点" style="font-size: 18px" href="spot.html">景点</a></li>
+										<li id="history-main"><a style="display: block;font-size: 18px" id="history_item" style="display:none" data-hover="历史记录" href="history.html" >历史记录</a></li>
+										<li id="collection-main"><a style="display: block;font-size: 18px" id="collection_item" style="display:none"  data-hover="收藏" href="collection.html" >收藏</a></li>
+										<li id="personCenter"><a style="display:block;font-size: 18px" id="person_item" style="display:none"  data-hover="个人中心" href="personCenter.html">个人中心</a></li>
+									</ul>
+								</div>
+							</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </nav>
+	    </div>
+	</section>
+
+	<!-- Page-Bar -->	
+
+
+<!--map-->
+
+	<div id="container"></div>
+
+	<!-- Page-Bar -->
+	 	<div class="top_tit">
+				<span class="span1"><a href="news.html">热门推荐</a></span><br />
+				<span class="span2">NEWS</span>
+		</div>
+		<div id="strategies">
+		 	<ul>
+                 <li style="float:left;width: 50%">
+                    <div>
+                        <div style="float: left;margin-left:20px">
+                            <a href="spot.html"><img src="/static/images/news1.png" alt="" /></a>
+                            <i></i>
+                        </div>
+                        <div style="float:left;margin-left:40px;width: 20%">
+                            <div><a class="title add_title" src="index.html">名称1</a></div>
+
+                            <div style="float:left;margin-left: 10px">热度：</div><div class="hot">热度1</div>
+                            <div style="float:left;margin-left: 10px">星级：</div><div class="rate">星级1</div>
+
+                            <div>简介：</div><div class="breafIntroduce">
+                                    这里有一句话简介1
+                                </div>
+                        </div>
+                    </div >
+                    <div style="float:right;width: 20%;padding-top: 20px" >
+                            <div style="float:left;margin-left: 10px">票价：</div><div class="hot">票价1</div>
+                            <div style="float:left;margin-left: 10px">销量：</div><div class="rate">销量1</div>
+                        <button type="button" id="collect" class="add_btn" onclick="collect(this)">收藏</button>
+                    </div>
+                </li>
+
+                <li style="float:right;width: 50%">
+                    <div>
+                        <div style="float: left;margin-left:20px">
+                            <a href="spot.html"><img src="/static/images/news1.png" alt="" /></a>
+                            <i></i>
+                        </div>
+                        <div style="float:left;margin-left:40px;width: 20%">
+                            <div><a class="title add_title" src="index.html">名称2</a></div>
+
+                            <div style="float:left;margin-left: 10px">热度：</div><div class="hot">热度2</div>
+                            <div style="float:left;margin-left: 10px">星级：</div><div class="rate">星级2</div>
+
+                            <div>简介：</div><div class="breafIntroduce">
+                                    这里有一句话简介1
+                                </div>
+                        </div>
+                    </div >
+                    <div style="float:right;width: 20%;padding-top: 20px" >
+                            <div style="float:left;margin-left: 10px">票价：</div><div class="hot">票价2</div>
+                            <div style="float:left;margin-left: 10px">销量：</div><div class="rate">销量2</div>
+                        <button type="button" id="collect" class="add_btn" onclick="collect(this)">收藏</button>
+                    </div>
+                </li>
+
+                <hr/>
+
+				<li style="float:left;width: 50%">
+                    <div>
+                        <div style="float: left;margin-left:20px">
+                            <a href="spot.html"><img src="/static/images/news1.png" alt="" /></a>
+                            <i></i>
+                        </div>
+                        <div style="float:left;margin-left:40px;width: 20%">
+                            <div><a class="title add_title" src="index.html">名称3</a></div>
+
+                            <div style="float:left;margin-left: 10px">热度：</div><div class="hot">热度3</div>
+                            <div style="float:left;margin-left: 10px">星级：</div><div class="rate">星级3</div>
+
+                            <div>简介：</div><div class="breafIntroduce">
+                                    这里有一句话简介1
+                                </div>
+                        </div>
+                    </div >
+                    <div style="float:right;width: 20%;padding-top: 20px" >
+                            <div style="float:left;margin-left: 10px">票价：</div><div class="hot">票价3</div>
+                            <div style="float:left;margin-left: 10px">销量：</div><div class="rate">销量3</div>
+                        <button type="button" id="collect" class="add_btn" onclick="collect(this)">收藏</button>
+                    </div>
+                </li>
+
+                <li style="float:right;width: 50%">
+                    <div>
+                        <div style="float: left;margin-left:20px">
+                            <a href="spot.html"><img src="/static/images/news1.png" alt="" /></a>
+                            <i></i>
+                        </div>
+                        <div style="float:left;margin-left:40px;width: 20%">
+                            <div><a class="title add_title" src="index.html">名称4</a></div>
+
+                            <div style="float:left;margin-left: 10px">热度：</div><div class="hot">热度4</div>
+                            <div style="float:left;margin-left: 10px">星级：</div><div class="rate">星级4</div>
+
+                            <div>简介：</div><div class="breafIntroduce">
+                                    这里有一句话简介1
+                                </div>
+                        </div>
+                    </div >
+                    <div style="float:right;width: 20%;padding-top: 20px" >
+                            <div style="float:left;margin-left: 10px">票价：</div><div class="hot">票价4</div>
+                            <div style="float:left;margin-left: 10px">销量：</div><div class="rate">销量4</div>
+                        <button type="button" id="collect" class="add_btn" onclick="collect(this)">收藏</button>
+                    </div>
+                </li>
+                <hr/>
+                <li style="float:left;width: 50%">
+                    <div>
+                        <div style="float: left;margin-left:20px">
+                            <a href="spot.html"><img src="/static/images/news1.png" alt="" /></a>
+                            <i></i>
+                        </div>
+                        <div style="float:left;margin-left:40px;width: 20%">
+                            <div><a class="title add_title" src="index.html">名称1</a></div>
+
+                            <div style="float:left;margin-left: 10px">热度：</div><div class="hot">热度1</div>
+                            <div style="float:left;margin-left: 10px">星级：</div><div class="rate">星级1</div>
+
+                            <div>简介：</div><div class="breafIntroduce">
+                                    这里有一句话简介1
+                                </div>
+                        </div>
+                    </div >
+                    <div style="float:right;width: 20%;padding-top: 20px" >
+                            <div style="float:left;margin-left: 10px">票价：</div><div class="hot">票价1</div>
+                            <div style="float:left;margin-left: 10px">销量：</div><div class="rate">销量1</div>
+                        <button type="button" id="collect" class="add_btn" onclick="collect(this)">收藏</button>
+                    </div>
+                </li>
+
+                <li style="float:right;width: 50%">
+                    <div>
+                        <div style="float: left;margin-left:20px">
+                            <a href="spot.html"><img src="/static/images/news1.png" alt="" /></a>
+                            <i></i>
+                        </div>
+                        <div style="float:left;margin-left:40px;width: 20%">
+                            <div><a class="title add_title" src="index.html">名称2</a></div>
+
+                            <div style="float:left;margin-left: 10px">热度：</div><div class="hot">热度2</div>
+                            <div style="float:left;margin-left: 10px">星级：</div><div class="rate">星级2</div>
+
+                            <div>简介：</div><div class="breafIntroduce">
+                                    这里有一句话简介1
+                                </div>
+                        </div>
+                    </div >
+                    <div style="float:right;width: 20%;padding-top: 20px" >
+                            <div style="float:left;margin-left: 10px">票价：</div><div class="hot">票价2</div>
+                            <div style="float:left;margin-left: 10px">销量：</div><div class="rate">销量2</div>
+                        <button type="button" id="collect" class="add_btn" onclick="collect(this)">收藏</button>
+                    </div>
+                </li>
+                <hr/>
+
+
+				<li style="float:left;width: 50%">
+                    <div>
+                        <div style="float: left;margin-left:20px">
+                            <a href="spot.html"><img src="/static/images/news1.png" alt="" /></a>
+                            <i></i>
+                        </div>
+                        <div style="float:left;margin-left:40px;width: 20%">
+                            <div><a class="title add_title" src="index.html">名称3</a></div>
+
+                            <div style="float:left;margin-left: 10px">热度：</div><div class="hot">热度3</div>
+                            <div style="float:left;margin-left: 10px">星级：</div><div class="rate">星级3</div>
+
+                            <div>简介：</div><div class="breafIntroduce">
+                                    这里有一句话简介1
+                                </div>
+                        </div>
+                    </div >
+                    <div style="float:right;width: 20%;padding-top: 20px" >
+                            <div style="float:left;margin-left: 10px">票价：</div><div class="hot">票价3</div>
+                            <div style="float:left;margin-left: 10px">销量：</div><div class="rate">销量3</div>
+                        <button type="button" id="collect" class="add_btn" onclick="collect(this)">收藏</button>
+                    </div>
+                </li>
+
+                <li style="float:right;width: 50%">
+                    <div>
+                        <div style="float: left;margin-left:20px">
+                            <a href="spot.html"><img src="/static/images/news1.png" alt="" /></a>
+                            <i></i>
+                        </div>
+                        <div style="float:left;margin-left:40px;width: 20%">
+                            <div><a class="title add_title" src="index.html">名称4</a></div>
+
+                            <div style="float:left;margin-left: 10px">热度：</div><div class="hot">热度4</div>
+                            <div style="float:left;margin-left: 10px">星级：</div><div class="rate">星级4</div>
+
+                            <div>简介：</div><div class="breafIntroduce">
+                                    这里有一句话简介1
+                                </div>
+                        </div>
+                    </div >
+                    <div style="float:right;width: 20%;padding-top: 20px" >
+                            <div style="float:left;margin-left: 10px">票价：</div><div class="hot">票价4</div>
+                            <div style="float:left;margin-left: 10px">销量：</div><div class="rate">销量4</div>
+                        <button type="button" id="collect" class="add_btn" onclick="collect(this)">收藏</button>
+                    </div>
+                </li>
+                <hr/>
+			</ul>
+		</div>
+	</div>
+
+	 <script type="text/javascript">
+         //登录之后的区别
+        if(localStorage.getItem("haveLogin")=="true")
+        {
+            console.log(localStorage.getItem("user_name"));
+            console.log(localStorage.getItem("user_email"));
+            console.log(localStorage.getItem("user_password"));
+            console.log(localStorage.getItem("user_phone"));
+            console.log(localStorage.getItem("user_gender"));
+            console.log(localStorage.getItem("user_state"));
+            console.log(localStorage.getItem("user_country"));
+            console.log(localStorage.getItem("user_city"));
+
+
+            document.getElementById("login-div").style.display="none";
+            document.getElementById("logout-div").style.display="block";
+            document.getElementById("history_item").style.display="none";
+            document.getElementById("collection_item").style.display="block";
+            document.getElementById("person_item").style.display="block";
+        }
+        else {
+            var buttons=document.getElementsByTagName("button");
+            for(var i=0;i<buttons.length;i++)
+            {
+                buttons[i].style.display="none";
+            }
+
+            document.getElementById("login-div").style.display = "block";
+            document.getElementById("logout-div").style.display = "none";
+            document.getElementById("history_item").style.display = "none";
+            document.getElementById("collection_item").style.display = "none";
+            document.getElementById("person_item").style.display = "none";
+        }
+
+        function logout() {
+            localStorage.removeItem("haveLogin");
+            localStorage.removeItem("user_name");
+            localStorage.removeItem("user_email");
+            localStorage.removeItem("user_password");
+            localStorage.removeItem("user_phone");
+            localStorage.removeItem("user_level");
+            localStorage.removeItem("user_state");
+            localStorage.removeItem("user_country");
+            localStorage.removeItem("user_city");
+        }
+
+
+
+		var map = new BMap.Map("container");
+		// 创建地图实例
+		var point = new BMap.Point(116.404, 39.915);
+		// 创建点坐标
+		map.centerAndZoom(point, 15);
+		// 初始化地图，设置中心点坐标和地图级别
+		map.enableScrollWheelZoom(true);
+		var geolocation = new BMap.Geolocation();
+		geolocation.getCurrentPosition(function getinfo(position){
+			if(this.getStatus() == BMAP_STATUS_SUCCESS){
+				var mk = new BMap.Marker(position.point);
+				map.addOverlay(mk);
+				map.panTo(position.point);
+				map.centerAndZoom(position.point,15);
+				console.log(position.address.city);
+				localStorage.setItem("current_address",position.address.province+position.address.city+position.address.district);
+
+				$.ajax({
+					url:"sight_info",
+					type:"GET",
+					datatype:"json",
+					data:{cityName:position.address.city},
+					success:function (data) {
+						var messageArray = JSON.parse(data);
+						console.log(messageArray);
+
+						var impl="";
+						impl="<ul>\
+                 <li style='float:left;width: 50%'>\
+                    <div>\
+                        <div style='float: left;margin-left:20px'>\
+                            <a href='spot.html'><img src='"+messageArray.message[0][10]+"' alt='图片' /></a>\
+                            <i></i>\
+                        </div>\
+                        <div style='float:left;margin-left:40px;width: 20%'>\
+                            <div><a class='title add_title' href='https://piao.qunar.com"+messageArray.message[0][9]+"'>"+messageArray.message[0][0]+"</a></div>\
+\
+                            <div style='float:left;margin-left: 10px'>热度：</div><div class='hot'>"+messageArray.message[0][5]+"</div>\
+                            <div style='float:left;margin-left: 10px'>星级：</div><div class='rate'>"+messageArray.message[0][1]+"</div>\
+\
+                            <div>简介：</div><div class='breafIntroduce'>"+messageArray.message[0][8]+"</div>\
+                        </div>\
+                    </div >\
+                    <div style='float:right;width: 20%;padding-top: 20px' >\
+                            <div style='float:left;margin-left: 10px'>票价：</div><div class='hot'>"+messageArray.message[0][3]+"</div>\
+                            <div style='float:left;margin-left: 10px'>销量：</div><div class='rate'>"+messageArray.message[0][4]+"</div>\
+                        <button type='button' id='collect' class='add_btn' onclick='collect(this)'>收藏</button>\
+                    </div>\
+                </li>\
+\
+                <li style='float:right;width: 50%'>\
+                    <div>\
+                        <div style='float: left;margin-left:20px'>\
+                            <a href='spot.html'><img src='"+messageArray.message[1][10]+"' alt='图片' /></a>\
+                            <i></i>\
+                        </div>\
+                        <div style='float:left;margin-left:40px;width: 20%'>\
+                            <div><a class='title add_title' href='https://piao.qunar.com"+messageArray.message[1][9]+"'>"+messageArray.message[1][0]+"</a></div>\
+\
+                            <div style='float:left;margin-left: 10px'>热度：</div><div class='hot'>"+messageArray.message[1][5]+"</div>\
+                            <div style='float:left;margin-left: 10px'>星级：</div><div class='rate'>"+messageArray.message[1][1]+"</div>\
+\
+                            <div>简介：</div><div class='breafIntroduce'>"+messageArray.message[1][8]+"</div>\
+                        </div>\
+                    </div >\
+                    <div style='float:right;width: 20%;padding-top: 20px' >\
+                            <div style='float:left;margin-left: 10px'>票价：</div><div class='hot'>"+messageArray.message[1][3]+"</div>\
+                            <div style='float:left;margin-left: 10px'>销量：</div><div class='rate'>"+messageArray.message[1][4]+"</div>\
+                        <button type='button' id='collect' class='add_btn' onclick='collect(this)'>收藏</button>\
+                    </div>\
+                </li>\
+                \
+\
+\
+\
+				<li style='float:left;width: 50%'>\
+                    <div>\
+                        <div style='float: left;margin-left:20px'>\
+                            <a href='spot.html'><img src='"+messageArray.message[2][10]+"' alt='图片' /></a>\
+                            <i></i>\
+                        </div>\
+                        <div style='float:left;margin-left:40px;width: 20%'>\
+                            <div><a class='title add_title' href='https://piao.qunar.com"+messageArray.message[2][9]+"'>"+messageArray.message[2][0]+"</a></div>\
+\
+                            <div style='float:left;margin-left: 10px'>热度：</div><div class='hot'>"+messageArray.message[2][5]+"</div>\
+                            <div style='float:left;margin-left: 10px'>星级：</div><div class='rate'>"+messageArray.message[2][1]+"</div>\
+\
+                            <div>简介：</div><div class='breafIntroduce'>"+messageArray.message[2][8]+"</div>\
+                        </div>\
+                    </div >\
+                    <div style='float:right;width: 20%;padding-top: 20px' >\
+                            <div style='float:left;margin-left: 10px'>票价：</div><div class='hot'>"+messageArray.message[2][3]+"</div>\
+                            <div style='float:left;margin-left: 10px'>销量：</div><div class='rate'>"+messageArray.message[2][4]+"</div>\
+                        <button type='button' id='collect' class='add_btn' onclick='collect(this)'>收藏</button>\
+                    </div>\
+                </li>\
+\
+                <li style='float:right;width: 50%'>\
+                    <div>\
+                        <div style='float: left;margin-left:20px'>\
+                            <a href='spot.html'><img src='"+messageArray.message[3][10]+"' alt='图片' /></a>\
+                            <i></i>\
+                        </div>\
+                        <div style='float:left;margin-left:40px;width: 20%'>\
+                            <div><a class='title add_title' href='https://piao.qunar.com"+messageArray.message[3][9]+"'>"+messageArray.message[3][0]+"</a></div>\
+\
+                            <div style='float:left;margin-left: 10px'>热度：</div><div class='hot'>"+messageArray.message[3][5]+"</div>\
+                            <div style='float:left;margin-left: 10px'>星级：</div><div class='rate'>"+messageArray.message[3][1]+"</div>\
+\
+                            <div>简介：</div><div class='breafIntroduce'>"+messageArray.message[3][8]+"</div>\
+                        </div>\
+                    </div >\
+                    <div style='float:right;width: 20%;padding-top: 20px' >\
+                            <div style='float:left;margin-left: 10px'>票价：</div><div class='hot'>"+messageArray.message[3][3]+"</div>\
+                            <div style='float:left;margin-left: 10px'>销量：</div><div class='rate'>"+messageArray.message[3][4]+"</div>\
+                        <button type='button' id='collect' class='add_btn' onclick='collect(this)'>收藏</button>\
+                    </div>\
+                </li>\
+                <hr/>\
+                <li style='float:left;width: 50%'>\
+                    <div>\
+                        <div style='float: left;margin-left:20px'>\
+                            <a href='spot.html'><img src='"+messageArray.message[4][10]+"' alt='图片' /></a>\
+                            <i></i>\
+                        </div>\
+                        <div style='float:left;margin-left:40px;width: 20%'>\
+                            <div><a class='title add_title' href='https://piao.qunar.com"+messageArray.message[4][9]+"'>"+messageArray.message[4][0]+"</a></div>\
+\
+                            <div style='float:left;margin-left: 10px'>热度：</div><div class='hot'>"+messageArray.message[4][5]+"</div>\
+                            <div style='float:left;margin-left: 10px'>星级：</div><div class='rate'>"+messageArray.message[4][1]+"</div>\
+\
+                            <div>简介：</div><div class='breafIntroduce'>"+messageArray.message[4][8]+"</div>\
+                        </div>\
+                    </div >\
+                    <div style='float:right;width: 20%;padding-top: 20px' >\
+                            <div style='float:left;margin-left: 10px'>票价：</div><div class='hot'>"+messageArray.message[4][3]+"</div>\
+                            <div style='float:left;margin-left: 10px'>销量：</div><div class='rate'>"+messageArray.message[4][4]+"</div>\
+                        <button type='button' id='collect' class='add_btn' onclick='collect(this)'>收藏</button>\
+                    </div>\
+                </li>\
+\
+                <li style='float:right;width: 50%'>\
+                    <div>\
+                        <div style='float: left;margin-left:20px'>\
+                            <a href='spot.html'><img src='"+messageArray.message[5][10]+"' alt='图片' /></a>\
+                            <i></i>\
+                        </div>\
+                        <div style='float:left;margin-left:40px;width: 20%'>\
+                            <div><a class='title add_title' href='https://piao.qunar.com"+messageArray.message[1][9]+"'>"+messageArray.message[5][0]+"</a></div>\
+\
+                            <div style='float:left;margin-left: 10px'>热度：</div><div class='hot'>"+messageArray.message[5][5]+"</div>\
+                            <div style='float:left;margin-left: 10px'>星级：</div><div class='rate'>"+messageArray.message[5][1]+"</div>\
+\
+                            <div>简介：</div><div class='breafIntroduce'>"+messageArray.message[5][8]+"</div>\
+                        </div>\
+                    </div >\
+                    <div style='float:right;width: 20%;padding-top: 20px' >\
+                            <div style='float:left;margin-left: 10px'>票价：</div><div class='hot'>"+messageArray.message[5][3]+"</div>\
+                            <div style='float:left;margin-left: 10px'>销量：</div><div class='rate'>"+messageArray.message[5][4]+"</div>\
+                        <button type='button' id='collect' class='add_btn' onclick='collect(this)'>收藏</button>\
+                    </div>\
+                </li>\
+                <hr/>\
+\
+\
+\
+				<li style='float:left;width: 50%'>\
+                    <div>\
+                        <div style='float: left;margin-left:20px'>\
+                            <a href='spot.html'><img src='"+messageArray.message[6][10]+"' alt='图片' /></a>\
+                            <i></i>\
+                        </div>\
+                        <div style='float:left;margin-left:40px;width: 20%'>\
+                            <div><a class='title add_title' href='https://piao.qunar.com"+messageArray.message[6][9]+"'>"+messageArray.message[6][0]+"</a></div>\
+\
+                            <div style='float:left;margin-left: 10px'>热度：</div><div class='hot'>"+messageArray.message[6][5]+"</div>\
+                            <div style='float:left;margin-left: 10px'>星级：</div><div class='rate'>"+messageArray.message[6][1]+"</div>\
+\
+                            <div>简介：</div><div class='breafIntroduce'>"+messageArray.message[6][8]+"</div>\
+                        </div>\
+                    </div >\
+                    <div style='float:right;width: 20%;padding-top: 20px' >\
+                            <div style='float:left;margin-left: 10px'>票价：</div><div class='hot'>"+messageArray.message[6][3]+"</div>\
+                            <div style='float:left;margin-left: 10px'>销量：</div><div class='rate'>"+messageArray.message[6][4]+"</div>\
+                        <button type='button' id='collect' class='add_btn' onclick='collect(this)'>收藏</button>\
+                    </div>\
+                </li>\
+\
+                <li style='float:right;width: 50%'>\
+                    <div>\
+                        <div style='float: left;margin-left:20px'>\
+                            <a href='spot.html'><img src='"+messageArray.message[7][10]+"' alt='图片' /></a>\
+                            <i></i>\
+                        </div>\
+                        <div style='float:left;margin-left:40px;width: 20%'>\
+                            <div><a class='title add_title' href='https://piao.qunar.com"+messageArray.message[7][9]+"'>"+messageArray.message[7][0]+"</a></div>\
+\
+                            <div style='float:left;margin-left: 10px'>热度：</div><div class='hot'>"+messageArray.message[7][5]+"</div>\
+                            <div style='float:left;margin-left: 10px'>星级：</div><div class='rate'>"+messageArray.message[7][1]+"</div>\
+\
+                            <div>简介：</div><div class='breafIntroduce'>"+messageArray.message[7][8]+"</div>\
+                        </div>\
+                    </div >\
+                    <div style='float:right;width: 20%;padding-top: 20px' >\
+                            <div style='float:left;margin-left: 10px'>票价：</div><div class='hot'>"+messageArray.message[7][3]+"</div>\
+                            <div style='float:left;margin-left: 10px'>销量：</div><div class='rate'>"+messageArray.message[7][4]+"</div>\
+                        <button type='button' id='collect' class='add_btn' onclick='collect(this)'>收藏</button>\
+                    </div>\
+                </li>\
+                <hr/>\
+				<li style='float:left;width: 50%'>\
+                    <div>\
+                        <div style='float: left;margin-left:20px;'>\
+                            <a href='spot.html'><img src='"+messageArray.message[8][10]+"' alt='图片' /></a>\
+                            <i></i>\
+                        </div>\
+                        <div style='float:left;margin-left:40px;width: 20%'>\
+                            <div><a class='title add_title' href='https://piao.qunar.com"+messageArray.message[8][9]+"'>"+messageArray.message[8][0]+"</a></div>\
+\
+                            <div style='float:left;margin-left: 10px'>热度：</div><div class='hot'>"+messageArray.message[8][5]+"</div>\
+                            <div style='float:left;margin-left: 10px'>星级：</div><div class='rate'>"+messageArray.message[8][1]+"</div>\
+\
+                            <div>简介：</div><div class='breafIntroduce'>"+messageArray.message[8][8]+"</div>\
+                        </div>\
+                    </div >\
+                    <div style='float:right;width: 20%;padding-top: 20px' >\
+                            <div style='float:left;margin-left: 10px'>票价：</div><div class='hot'>"+messageArray.message[8][3]+"</div>\
+                            <div style='float:left;margin-left: 10px'>销量：</div><div class='rate'>"+messageArray.message[8][4]+"</div>\
+                        <button type='button' id='collect' class='add_btn' onclick='collect(this)'>收藏</button>\
+                    </div>\
+                </li>\
+\
+                <li style='float:right;width: 50%'>\
+                    <div>\
+                        <div style='float: left;margin-left:20px'>\
+							<a href='spot.html'><img src='"+messageArray.message[9][10]+"' alt='图片' /></a>\
+                            <i></i>\
+                        </div>\
+                        <div style='float:left;margin-left:40px;width: 20%'>\
+                            <div><a class='title add_title' href='https://piao.qunar.com"+messageArray.message[9][9]+"'>"+messageArray.message[9][0]+"</a></div>\
+\
+                            <div style='float:left;margin-left: 10px'>热度：</div><div class='hot'>"+messageArray.message[9][5]+"</div>\
+                            <div style='float:left;margin-left: 10px'>星级：</div><div class='rate'>"+messageArray.message[9][1]+"</div>\
+\
+                            <div>简介：</div><div class='breafIntroduce'>"+messageArray.message[9][8]+"</div>\
+                        </div>\
+                    </div >\
+                    <div style='float:right;width: 20%;padding-top: 20px' >\
+                            <div style='float:left;margin-left: 10px'>票价：</div><div class='hot'>"+messageArray.message[9][3]+"</div>\
+                            <div style='float:left;margin-left: 10px'>销量：</div><div class='rate'>"+messageArray.message[9][4]+"</div>\
+                        <button type='button' id='collect' class='add_btn' onclick='collect(this)'>收藏</button>\
+                    </div>\
+                </li>\
+                <hr/>\
+\
+\
+\
+				<li style='float:left;width: 50%'>\
+                    <div>\
+                        <div style='float: left;margin-left:20px'>\
+                            <a href='spot.html'><img src='"+messageArray.message[10][10]+"' alt='图片' /></a>\
+                            <i></i>\
+                        </div>\
+                        <div style='float:left;margin-left:40px;width: 20%'>\
+                            <div><a class='title add_title' href='https://piao.qunar.com"+messageArray.message[10][9]+"'>"+messageArray.message[10][0]+"</a></div>\
+\
+                            <div style='float:left;margin-left: 10px'>热度：</div><div class='hot'>"+messageArray.message[10][5]+"</div>\
+                            <div style='float:left;margin-left: 10px'>星级：</div><div class='rate'>"+messageArray.message[10][1]+"</div>\
+\
+                            <div>简介：</div><div class='breafIntroduce'>"+messageArray.message[10][8]+"</div>\
+                        </div>\
+                    </div >\
+                    <div style='float:right;width: 20%;padding-top: 20px' >\
+                            <div style='float:left;margin-left: 10px'>票价：</div><div class='hot'>"+messageArray.message[10][3]+"</div>\
+                            <div style='float:left;margin-left: 10px'>销量：</div><div class='rate'>"+messageArray.message[10][4]+"</div>\
+                        <button type='button' id='collect' class='add_btn' onclick='collect(this)'>收藏</button>\
+                    </div>\
+                </li>\
+\
+                <li style='float:right;width: 50%'>\
+                    <div>\
+                        <div style='float: left;margin-left:20px'>\
+                            <a href='spot.html'><img src='"+messageArray.message[11][10]+"' alt='图片' /></a>\
+                            <i></i>\
+                        </div>\
+                        <div style='float:left;margin-left:40px;width: 20%'>\
+                            <div><a class='title add_title' href='https://piao.qunar.com"+messageArray.message[11][9]+"'>"+messageArray.message[11][0]+"</a></div>\
+\
+                            <div style='float:left;margin-left: 10px'>热度：</div><div class='hot'>"+messageArray.message[11][5]+"</div>\
+                            <div style='float:left;margin-left: 10px'>星级：</div><div class='rate'>"+messageArray.message[11][1]+"</div>\
+\
+                            <div>简介：</div><div class='breafIntroduce'>"+messageArray.message[11][8]+"</div>\
+                        </div>\
+                    </div >\
+                    <div style='float:right;width: 20%;padding-top: 20px' >\
+                            <div style='float:left;margin-left: 10px'>票价：</div><div class='hot'>"+messageArray.message[11][3]+"</div>\
+                            <div style='float:left;margin-left: 10px'>销量：</div><div class='rate'>"+messageArray.message[11][4]+"</div>\
+                        <button type='button' id='collect' class='add_btn' onclick='collect(this)'>收藏</button>\
+                    </div>\
+                </li>\
+                <hr/>\
+			</ul>"
+                        $("#strategies").html(impl);
+
+					}
+
+				})
+
+			}
+			else {
+				alert('failed'+this.getStatus());
+			}
+		});
+	</script>
+
+
+
+
+
+</body>
+</html>
